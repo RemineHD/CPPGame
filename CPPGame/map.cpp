@@ -32,6 +32,13 @@ Map::Map()
 
 }
 
+Map::~Map()
+{
+	SDL_DestroyTexture(grass);
+	SDL_DestroyTexture(water);
+	SDL_DestroyTexture(dirt);
+}
+
 void Map::loadMap(int arr[Game::levelSizeY][Game::levelSizeX])
 {
 	for (int row = 0; row < Game::levelSizeY; row++)

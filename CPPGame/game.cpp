@@ -3,14 +3,18 @@
 #include "map.h"
 
 #include "ecs.h"
-#include "componets.h"
+#include "components.h"
+#include "collision.h"
 
 Map* map;
+Manager manager;
 
 SDL_Renderer* Game::renderer = nullptr;
+SDL_Event Game::event;
 
-Manager manager;
+
 auto& player(manager.addEntity());
+auto& wall(manager.addEntity());
 
 Game::Game()
 {
@@ -53,13 +57,20 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	map = new Map();
 
 	player.addComponent<TransformComponent>();
+	player.getComponent<TransformComponent>().scale = 1;
+	player.addComponent<KeyboardController>();
 	player.addComponent<SpriteComponent>("assets/skeleton_idle.png");
+	player.addComponent<ColliderComponent>("player");
+
+	wall.addComponent<TransformComponent>(300.0f, 300.0f, 300, 20, 1);
+	wall.addComponent<SpriteComponent>("assets/grass.png");
+	wall.addComponent<ColliderComponent>("wall");
 
 }
 
 void Game::handleEvents()
 {
-	SDL_Event event;
+
 	SDL_PollEvent(&event);
 	switch (event.type) {
 		case SDL_QUIT:
@@ -78,12 +89,9 @@ void Game::update()
 	manager.refresh();
 	manager.update();
 
-	player.getComponent<TransformComponent>().position.add(Vector2D(5, 0));
-
-	
-	if (player.getComponent<TransformComponent>().position.x > 200)
+	if (Collision::AABB(player.getComponent<ColliderComponent>().collider, wall.getComponent<ColliderComponent>().collider))
 	{
-		player.getComponent<SpriteComponent>().setTexture("assets/skeleton_death.png");
+		std::cout << "Wall Hit!" << std::endl;
 	}
 
 }

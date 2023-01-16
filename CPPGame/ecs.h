@@ -13,16 +13,16 @@ class Entity;
 
 using ComponentID = std::size_t;
 
-inline ComponentID getComponetTypeID()
+inline ComponentID getComponentTypeID()
 {
 	static ComponentID lastID = 0;
 
 	return lastID++;
 }
 
-template <typename T> inline ComponentID getComponetTypeID() noexcept
+template <typename T> inline ComponentID getComponentTypeID() noexcept
 {
-	static ComponentID typeID = getComponetTypeID();
+	static ComponentID typeID = getComponentTypeID();
 	return typeID;
 }
 
@@ -71,7 +71,7 @@ public:
 
 	template <typename T> bool hasComponent() const
 	{
-		return componentBitSet[getComponetTypeID<T>];
+		return componentBitSet[getComponentTypeID<T>];
 	}
 
 	template <typename T, typename... TArgs>
@@ -82,8 +82,8 @@ public:
 		std::unique_ptr<Component> uPtr{ c };
 		components.emplace_back(std::move(uPtr));
 
-		componentArray[getComponetTypeID<T>()] = c;
-		componentBitSet[getComponetTypeID<T>()] = true;
+		componentArray[getComponentTypeID<T>()] = c;
+		componentBitSet[getComponentTypeID<T>()] = true;
 
 		c->init();
 		return *c;
@@ -92,7 +92,7 @@ public:
 
 	template<typename T> T& getComponent() const
 	{
-		auto ptr(componentArray[getComponetTypeID<T>()]);
+		auto ptr(componentArray[getComponentTypeID<T>()]);
 		return *static_cast<T*>(ptr);
 	}
 
