@@ -1,12 +1,16 @@
 #include "game.h"
 #include "textureManager.h"
-#include "gameObject.h"
 #include "map.h"
 
-GameObject* player;
+#include "ecs.h"
+#include "componets.h"
+
 Map* map;
 
 SDL_Renderer* Game::renderer = nullptr;
+
+Manager manager;
+auto& player(manager.addEntity());
 
 Game::Game()
 {
@@ -46,8 +50,10 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 		isRunning = false;
 	}
 
-	player = new GameObject("assets/skeleton_idle.png", 0, 0);
 	map = new Map();
+
+	player.addComponent<TransformComponent>();
+	player.addComponent<SpriteComponent>("assets/skeleton_idle.png");
 
 }
 
@@ -66,8 +72,20 @@ void Game::handleEvents()
 
 void Game::update()
 {
-	player->update();
+	//player->update();
 	//map->loadMap();
+
+	manager.refresh();
+	manager.update();
+
+	player.getComponent<TransformComponent>().position.add(Vector2D(5, 0));
+
+	
+	if (player.getComponent<TransformComponent>().position.x > 200)
+	{
+		player.getComponent<SpriteComponent>().setTexture("assets/skeleton_death.png");
+	}
+
 }
 
 void Game::render()
@@ -75,7 +93,7 @@ void Game::render()
 
 	SDL_RenderClear(renderer);
 	map->drawMap();
-	player->render();
+	manager.draw();
 	SDL_RenderPresent(renderer);
 
 }

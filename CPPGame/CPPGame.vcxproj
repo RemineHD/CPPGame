@@ -140,11 +140,17 @@
     <ClCompile Include="gameObject.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="textureManager.cpp" />
+    <ClCompile Include="Vector2D.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="componets.h" />
+    <ClInclude Include="ecs.h" />
     <ClInclude Include="gameObject.h" />
     <ClInclude Include="map.h" />
+    <ClInclude Include="transformComponent.h" />
+    <ClInclude Include="spriteComponent.h" />
     <ClInclude Include="textureManager.h" />
+    <ClInclude Include="Vector2D.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
