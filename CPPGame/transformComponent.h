@@ -15,7 +15,7 @@ struct TransformComponent : public Component
 
 	int speed = 3;
 
-	TransformComponent() { setPos(0.0f, 0.0f); }
+	TransformComponent() { position.zero(); }
 
 	TransformComponent(float x, float y) { setPos(x, y); }
 

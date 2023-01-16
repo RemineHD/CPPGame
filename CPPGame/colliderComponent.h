@@ -14,15 +14,15 @@ public:
 
 	void init() override
 	{
-		/*
-		 HAS COMPONENT = BAD
+		
 		if (!entity->hasComponent<TransformComponent>())
 		{
 			entity->addComponent<TransformComponent>();
 		}
-
-		*/
 		transform = &entity->getComponent<TransformComponent>();
+
+		Game::colliders.push_back(this);
+
 	}
 
 	ColliderComponent(std::string t)

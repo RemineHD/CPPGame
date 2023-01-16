@@ -5,3 +5,4 @@
 #include "spriteComponent.h"
 #include "KeyboardController.h"
 #include "colliderComponent.h"
+#include "tileComponent.h"
