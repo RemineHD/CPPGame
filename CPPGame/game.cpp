@@ -56,13 +56,12 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 
 	map = new Map();
 
-	player.addComponent<TransformComponent>();
-	player.getComponent<TransformComponent>().scale = 1;
+	player.addComponent<TransformComponent>(0, 0, 24, 23, 5);
 	player.addComponent<KeyboardController>();
 	player.addComponent<SpriteComponent>("assets/skeleton_idle.png");
 	player.addComponent<ColliderComponent>("player");
 
-	wall.addComponent<TransformComponent>(300.0f, 300.0f, 300, 20, 1);
+	wall.addComponent<TransformComponent>(300.0f, 300.0f, 300, 20, 5);
 	wall.addComponent<SpriteComponent>("assets/grass.png");
 	wall.addComponent<ColliderComponent>("wall");
 

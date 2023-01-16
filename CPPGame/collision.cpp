@@ -1,19 +1,14 @@
 #include "collision.h"
 
-bool Collision::AABB(const SDL_Rect& recA, const SDL_Rect& recB)
+bool Collision::AABB(const SDL_Rect& rectA, const SDL_Rect& rectB)
 {
 
-	if (
-		recA.x + recA.w >= recB.x &&
-		recB.x + recB.w >= recA.x &&
-		recA.y + recA.h >= recB.y &&
-		recB.y + recB.h >= recA.y
-		)
-	{
-		return true;
-	}
-	else {
-		return false;
-	}
+    if (rectA.x + rectA.w >= rectB.x && rectB.x + rectB.w >= rectA.x) {
+        // Check for vertical collision
+        if (rectA.y + rectA.h >= rectB.y && rectB.y + rectB.h >= rectA.y) {
+            return true;
+        }
+    }
+    return false;
 
 }
