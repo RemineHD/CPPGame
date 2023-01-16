@@ -136,10 +136,12 @@
   <ItemGroup>
     <ClCompile Include="game.cpp" />
     <ClCompile Include="game.h" />
+    <ClCompile Include="gameObject.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="textureManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="gameObject.h" />
     <ClInclude Include="textureManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
