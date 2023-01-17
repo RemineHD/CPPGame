@@ -115,7 +115,7 @@ public:
 	}
 	void refresh()
 	{
-		//Cleaning all the non active entities.
+		//Cleaning all non active entities.
 		entities.erase(std::remove_if(std::begin(entities), std::end(entities),
 			[](const std::unique_ptr<Entity>& mEntity)
 			{
