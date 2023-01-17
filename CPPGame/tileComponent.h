@@ -37,13 +37,14 @@ public:
 			path = "assets/grass.png";
 			break;
 		default:
+			path = "assets/water.png";
 			break;
 		}
 	}
 
 	void init() override
 	{
-		entity->addComponent<TransformComponent>((float)tileRect.x, (float)tileRect.y, tileRect.w, tileRect.h, 5);
+		entity->addComponent<TransformComponent>((float)tileRect.x, (float)tileRect.y, tileRect.w, tileRect.h, 15);
 		transform = &entity->getComponent<TransformComponent>();
 
 		entity->addComponent<SpriteComponent>(path);
